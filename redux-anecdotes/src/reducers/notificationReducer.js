@@ -4,17 +4,17 @@ const notificationReducer = (state = { text: "", timer: null }, action) => {
 			if (state.timer !== null) {
 				clearTimeout(state.timer);
 			}
-			return { text: action.data.text, timer: action.data.timer };
+			return { text: action.data.notification, timer: action.data.timer };
 
 		case "REMOVE_NOTIFICATION":
 			return { text: "", timer: null };
-			
+
 		default:
 			return state;
 	}
 }
 
-export const setNotification = (text, seconds) => {
+export const setNotification = (notification, seconds) => {
 	return async dispatch => {
 		const timer = setTimeout(() => {
 			dispatch({
@@ -24,7 +24,7 @@ export const setNotification = (text, seconds) => {
 
 		await dispatch({
 			type: "SET_NOTIFICATION",
-			data: { text, timer },
+			data: { notification, timer },
 		})
 	}
 }
